@@ -1,21 +1,22 @@
-# ChemSol 
-## Arieh Warshel, Jan Florian,  James Borden
+# This is the ChemSol fork used in the mobile app PHREEQC plus
 
-#### This is the ChemSol fork used in the mobile app PHREEQC plus ####
-
-# Changes in this fork #
+## Changes in this fork
 
 * alternative Makefile (for cross-compilation)
 * cs21.f
+
 program can read the numbers from the line input in free format (in the original code, the exact positions were required)
 
-# Compilation #
+## Compilation
 
-make legacy
+```make legacy
 
 The provided Makefile refers to aarch64 version. For the others (arm, x86, x86_64) change the compiler name. 
 
-####
+# ORIGINAL DESCRIPTION:
+
+# ChemSol 
+## Arieh Warshel, Jan Florian,  James Borden
 
 ChemSol is a program for the calculation of solvation energies by using the Langevin Dipole model of the solvent and ab-initio calculations. The advantages of it over other solvation models is that it can more accurately model solvation effects for molecules with a high net charge, i.e. over +1. It has been particuarly parametrized for reactions involving organic reactions with phosphorous containing compounds such as organophosphates by water.
 
