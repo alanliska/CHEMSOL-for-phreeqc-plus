@@ -3,9 +3,7 @@
 ## Changes in this fork
 
 * alternative Makefile (for cross-compilation)
-* cs21.f
-
-program can read the numbers from the line input in free format (in the original code, the exact positions were required)
+* cs21.f - program can read the numbers from the line input in free format (in the original code, the exact positions were required)
 
 ## Compilation
 
