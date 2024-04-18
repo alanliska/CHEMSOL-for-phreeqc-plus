@@ -1,5 +1,5 @@
-FC = aarch64-linux-android-gfortran.exe 
-FCFLAGS = -O2 -pie
+FC = x86_64-linux-android-gfortran
+FCFLAGS = -fPIC -pie
 SRCDIR = src
 objects = $(SRCDIR)/chemsol.o $(SRCDIR)/push_array.o
 

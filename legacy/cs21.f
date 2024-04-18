@@ -114,7 +114,6 @@ C     Preffered method for calculation atomic charges is now ESP PCM-B3LYP/6-31G
       character*256 input_file_name
       character*256 vdw_name
       character*3 relax 
-      character*22 :: path='/data/data/cz.p/files/'
       logical do_gas
       integer iac_conv (89), iacp(mxatm), mass(88)
       data iac_conv/1,2,
@@ -148,21 +147,22 @@ c       81-Fr, 82-Ra.
      8 223,226/ 
 
 c     open archive (this is actually done in subroutine solvout
-c      open (43,file=path//'cs.arc',access ='append')
+c     open (43,file='cs.arc',access ='append')
 c     open input file with vdw and grid options
 c     open (44, file='vdw.par')
-c      call getarg(1,vdw_name)
-      open (44,file=path//'vdw_name')
+      call getarg(1,vdw_name)
+      open (44,file=vdw_name)
 c     open input file for atom input
 c     call getenv('SOLVINP',fname)
-c      call getarg(2,input_file_name)
-      open (45,file=path//'input_file_name')
+      call getarg(2,input_file_name)
+      open (45,file=input_file_name)
       read (45,'(a13)') molname
       read (45,*) n_reg1, ngeom
       imp2 = 0 
       read(45,'(a4)') ssname
       do i=1,n_reg1
       read (45,*) atom(i),zan(i),q(i),xw(1,i), xw(2,i), xw(3,i)
+C      read (45,1000) atom(i),zan(i),q(i),xw(1,i), xw(2,i), xw(3,i)
 c     Gaussian atom types (nuclear charge) are mapped onto ChemSol ones (iacw). 
       iacp(i)=int(zan(i))
       iacw(i)=iac_conv(iacp(i))
@@ -252,9 +252,9 @@ c     gas, T=298.5)
      $6x,"                    Los Angeles, 1999                      "/
      $6x,"                                                           "/
      $6x,"                                                           "/
-     $6x,"       Special version for Android (aarch64, pie)          "/
+     $6x,"          Special version for Android (aarch64)            "/
      $6x,"       compiled by Alan Liska & Veronika Ruzickova         "/
-     $6x,"                      on May 7, 2022                       "/
+     $6x,"                     on June 1, 2019                       "/
      $6x,"                                                           "/
      $6x,"***********************************************************"//
      $      )
@@ -300,6 +300,7 @@ c      of ChemSol atom types (that differ in VdW radii).
          read(45,'(a4)') ssname
          do i=1,n_reg1
          read (45,*) dumm1,dumm2,q(i),xw(1,i), xw(2,i), xw(3,i)
+C         read (45,1000) dumm1,dumm2,q(i),xw(1,i), xw(2,i), xw(3,i)
          end do
          read (45,'(a3)') relax
          if (relax.eq.'pcm') then
@@ -321,8 +322,7 @@ c      of ChemSol atom types (that differ in VdW radii).
             q_mp2(i) = q(i)
             end do
          end if
-c         open (44, file='vdw.par')
-         open (44, file=path//'vdw_name')
+         open (44, file='vdw.par')
       end if
 
 c     Initialize parameters and read in the option file (vdw.par).
@@ -1041,7 +1041,6 @@ c:::  local vars
       real*8 epom(44)
 c     integer*2 jp3(mxpair3)
       character*1 dash(72)
-      character*22 :: path='/data/data/cz.p/files/'
       data dash/72*'-'/
       data iopen/1/
 c......................................................................
@@ -1060,7 +1059,7 @@ c --  Relaxation of the langevin dipoles
 
 c     Dump dipoles into xyz file for viewing by the program xmol
       if (.false.) then
-      open (50, file=path//'cs_dipoles.xyz')
+      open (50, file='cs_dipoles.xyz')
       nd2plot=0
       do i=1,nd
          if (xl(1,i).eq.0.0) nd2plot=nd2plot+1
@@ -1546,7 +1545,6 @@ c      elgvn.......noniterative lgvn energy (using distance-dependent dielectric
 c      elgwa......iterative lgvn energy 
 
       character*1 dash(72)
-      character*22 :: path='/data/data/cz.p/files/'
       data dash/72*'-'/
 c......................................................................
       write(6,20) dash
@@ -1578,7 +1576,7 @@ c     Short output (do not print for noniterative LD)
       if (iterld.eq.1) then
 
 C     Comment the following line for IBM and uncomment the CIBM line
-      open (43,file=path//'cs.arc',access='append')
+      open (43,file='cs.arc',access='append')
 CIBM  open (43,file='cs.arc',position='append')
 
       if (do_gas) then
